@@ -18,18 +18,26 @@ internal class Program
 
         //Cargar un Género de Prueba[Commit: "Carga Género de Prueba"]
 
-        mResourceApi.ChangeOntology("tgenerojl.owl");
-        string identificador = Guid.NewGuid().ToString();
-        Genre generoPrueba = new(identificador);
-        generoPrueba.Schema_name = "Género de Prueba";
-        SecondaryResource generoSR = generoPrueba.ToGnossApiResource(mResourceApi, $"Genre_{identificador}");
-        try
-        {
-            mResourceApi.LoadSecondaryResource(generoSR);
-        }
-        catch (Exception)
-        {
-            mResourceApi.Log.Error($"Exception -> Error en cargar el genero");
-        }
+        //mResourceApi.ChangeOntology("tgenerojl.owl");
+        //string identificador = Guid.NewGuid().ToString();
+        //Genre generoPrueba = new(identificador);
+        //generoPrueba.Schema_name = "Género de Prueba";
+        //SecondaryResource generoSR = generoPrueba.ToGnossApiResource(mResourceApi, $"Genre_{identificador}");
+        //try
+        //{
+        //    mResourceApi.LoadSecondaryResource(generoSR);
+        //}
+        //catch (Exception)
+        //{
+        //    mResourceApi.Log.Error($"Exception -> Error en cargar el genero");
+        //}
+
+        //Cargar una Persona de Prueba  [Commit: "Carga Persona de Prueba"]
+
+        mResourceApi.ChangeOntology("tpersonajl.owl");
+        Person personaPrueba = new Person();
+        personaPrueba.Schema_name = "Persona de Prueba";
+        ComplexOntologyResource resorceLoad = personaPrueba.ToGnossApiResource(mResourceApi, new List<string>() { "cine" }, Guid.NewGuid(), Guid.NewGuid());
+        mResourceApi.LoadComplexSemanticResource(resorceLoad);
     }
 }

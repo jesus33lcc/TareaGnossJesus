@@ -42,12 +42,38 @@ internal class Program
 
         //Obtener los datos de la Persona de Prueba y Modificar el nombre de la Persona de Prueba [Commit:"Modificación persona de Prueba"]
 
+        //string uri = "";
+        //string pOntology = "tpersonajl";
+        //string select = string.Empty, where = string.Empty;
+        //select += $@"SELECT DISTINCT ?s";
+        //where += $@" WHERE {{ ";
+        //where += $@"OPTIONAL{{?s ?p 'Persona de Prueba'.}}";
+        //where += $@"}}";
+        //SparqlObject resultadoQuery = mResourceApi.VirtuosoQuery(select, where, pOntology);
+        //if (resultadoQuery != null && resultadoQuery.results != null && resultadoQuery.results.bindings != null && resultadoQuery.results.bindings.Count > 0 && resultadoQuery.results.bindings.FirstOrDefault()?.Keys.Count > 0)
+        //{
+        //    foreach (var item in resultadoQuery.results.bindings)
+        //    {
+        //        uri = item["s"].value;
+        //    }
+        //}
+        //string[] partes = uri.Split('/', '_');
+        //string resourceId = partes[5];
+        //string articleID = partes[6];
+        //Person personaActor1Modificado = new Person();
+        //personaActor1Modificado.Schema_name = "Persona de Prueba Modificado";
+        //mResourceApi.ModifyComplexOntologyResource(personaActor1Modificado.ToGnossApiResource(mResourceApi, new List<string>() { "cine" }, new Guid(resourceId), new Guid(articleID)), false, true);
+
+        //Eliminar a la Persona de Prueba[Commit: "Eliminación Persona de Prueba"]
+
+        //En caso de que no se tenga la uri de la persona que queremos eliminar, hay que buscarla
+
         string uri = "";
         string pOntology = "tpersonajl";
         string select = string.Empty, where = string.Empty;
         select += $@"SELECT DISTINCT ?s";
         where += $@" WHERE {{ ";
-        where += $@"OPTIONAL{{?s ?p 'Persona de Prueba'.}}";
+        where += $@"OPTIONAL{{?s ?p 'Persona de Prueba Modificado'.}}";
         where += $@"}}";
         SparqlObject resultadoQuery = mResourceApi.VirtuosoQuery(select, where, pOntology);
         if (resultadoQuery != null && resultadoQuery.results != null && resultadoQuery.results.bindings != null && resultadoQuery.results.bindings.Count > 0 && resultadoQuery.results.bindings.FirstOrDefault()?.Keys.Count > 0)
@@ -57,12 +83,17 @@ internal class Program
                 uri = item["s"].value;
             }
         }
-        string[] partes = uri.Split('/', '_');
-        string resourceId = partes[5];
-        string articleID = partes[6];
-        Person personaActor1Modificado = new Person();
-        personaActor1Modificado.Schema_name = "Persona de Prueba Modificado";
-        mResourceApi.ModifyComplexOntologyResource(personaActor1Modificado.ToGnossApiResource(mResourceApi, new List<string>() { "cine" }, new Guid(resourceId), new Guid(articleID)), false, true);
+
+        string mensajeFalloBorradoRecPrincipal = $"Error en el borrado de la Persona {uri} -> Nombre:";
+        try
+        {
+            mResourceApi.ChangeOntology("tpersonajl.owl");
+            mResourceApi.PersistentDelete(mResourceApi.GetShortGuid(uri), true, true);
+        }
+        catch (Exception)
+        {
+            mResourceApi.Log.Error($"Exception -> {mensajeFalloBorradoRecPrincipal}");
+        }
 
     }
 }

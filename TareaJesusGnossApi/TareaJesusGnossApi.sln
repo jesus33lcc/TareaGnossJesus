@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34031.279
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TareaJesusGnossApi", "TareaJesusGnossApi\TareaJesusGnossApi.csproj", "{D9F7FE8B-00CB-4C03-B09D-1AD27CDFAB9C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "demo-gnoss-akademia-20-20", "ClasesGeneradas\demo-gnoss-akademia-20-20.csproj", "{3C88159C-F59D-4CCE-984F-3184F62AE640}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D9F7FE8B-00CB-4C03-B09D-1AD27CDFAB9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9F7FE8B-00CB-4C03-B09D-1AD27CDFAB9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9F7FE8B-00CB-4C03-B09D-1AD27CDFAB9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9F7FE8B-00CB-4C03-B09D-1AD27CDFAB9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C88159C-F59D-4CCE-984F-3184F62AE640}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C88159C-F59D-4CCE-984F-3184F62AE640}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C88159C-F59D-4CCE-984F-3184F62AE640}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C88159C-F59D-4CCE-984F-3184F62AE640}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C62995D3-CC3C-4332-874C-D625E2697554}
+	EndGlobalSection
+EndGlobal

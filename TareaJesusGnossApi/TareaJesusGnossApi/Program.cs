@@ -68,32 +68,41 @@ internal class Program
 
         //En caso de que no se tenga la uri de la persona que queremos eliminar, hay que buscarla
 
-        string uri = "";
-        string pOntology = "tpersonajl";
-        string select = string.Empty, where = string.Empty;
-        select += $@"SELECT DISTINCT ?s";
-        where += $@" WHERE {{ ";
-        where += $@"OPTIONAL{{?s ?p 'Persona de Prueba Modificado'.}}";
-        where += $@"}}";
-        SparqlObject resultadoQuery = mResourceApi.VirtuosoQuery(select, where, pOntology);
-        if (resultadoQuery != null && resultadoQuery.results != null && resultadoQuery.results.bindings != null && resultadoQuery.results.bindings.Count > 0 && resultadoQuery.results.bindings.FirstOrDefault()?.Keys.Count > 0)
-        {
-            foreach (var item in resultadoQuery.results.bindings)
-            {
-                uri = item["s"].value;
-            }
-        }
+        //string uri = "";
+        //string pOntology = "tpersonajl";
+        //string select = string.Empty, where = string.Empty;
+        //select += $@"SELECT DISTINCT ?s";
+        //where += $@" WHERE {{ ";
+        //where += $@"OPTIONAL{{?s ?p 'Persona de Prueba Modificado'.}}";
+        //where += $@"}}";
+        //SparqlObject resultadoQuery = mResourceApi.VirtuosoQuery(select, where, pOntology);
+        //if (resultadoQuery != null && resultadoQuery.results != null && resultadoQuery.results.bindings != null && resultadoQuery.results.bindings.Count > 0 && resultadoQuery.results.bindings.FirstOrDefault()?.Keys.Count > 0)
+        //{
+        //    foreach (var item in resultadoQuery.results.bindings)
+        //    {
+        //        uri = item["s"].value;
+        //    }
+        //}
 
-        string mensajeFalloBorradoRecPrincipal = $"Error en el borrado de la Persona {uri} -> Nombre:";
-        try
-        {
-            mResourceApi.ChangeOntology("tpersonajl.owl");
-            mResourceApi.PersistentDelete(mResourceApi.GetShortGuid(uri), true, true);
-        }
-        catch (Exception)
-        {
-            mResourceApi.Log.Error($"Exception -> {mensajeFalloBorradoRecPrincipal}");
-        }
+        //string mensajeFalloBorradoRecPrincipal = $"Error en el borrado de la Persona {uri} -> Nombre:";
+        //try
+        //{
+        //    mResourceApi.ChangeOntology("tpersonajl.owl");
+        //    mResourceApi.PersistentDelete(mResourceApi.GetShortGuid(uri), true, true);
+        //}
+        //catch (Exception)
+        //{
+        //    mResourceApi.Log.Error($"Exception -> {mensajeFalloBorradoRecPrincipal}");
+        //}
+
+        //Cargar una Persona de Prueba  [Commit: "Carga Persona de Prueba 2"].
+
+        mResourceApi.ChangeOntology("tpersonajl.owl");
+        Person personaPrueba = new Person();
+        personaPrueba.Schema_name = "Persona de Prueba 2";
+        ComplexOntologyResource resorceLoad = personaPrueba.ToGnossApiResource(mResourceApi, new List<string>() { "cine" }, Guid.NewGuid(), Guid.NewGuid());
+        mResourceApi.LoadComplexSemanticResource(resorceLoad);
+
 
     }
 }
